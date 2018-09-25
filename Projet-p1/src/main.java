@@ -39,7 +39,7 @@ public class main {
         
         //obtenir l'arraylist dans le fichier d'entrée
         lotArray = terrain.getJSONArray("lotissements");
-        if(typeTerrain == 2){
+        if(typeTerrain == 2){//2 représente le type de terrain commercial
             for(int i = 0; i < lotArray.size(); ++i){
                 lotObject = lotArray.getJSONObject(i);
                 lotDescription = lotObject.getString("description");
@@ -53,15 +53,16 @@ public class main {
                 Double montantService = 0.0;
                 Double valeurParLot = 0.0; 
                 montantValeurLot = superficie * prixMax;
-                montantDroitPassage = 500-(3*(0.15*montantValeurLot));                
+                montantDroitPassage = 500-(nombreDroit*(0.15*montantValeurLot));//500 représent un montant de base                
                 if(superficie <=500){
                     montantService = 500.00;
                 }else{
-                    montantService = 1500.00*(nombreService + 2);
+                    montantService = 1500.00*(nombreService + 2);//1500.00 $ du service, si la superficie est supérieure à 500 m2
                     if(montantService > 5000.00){
-                        montantService = 5000.00;
+                        montantService = 5000.00;//Le montant pour les services ne peut pas dépasser les 5000.00 $
                     }
                 }
+                //Un montant fixe de 733.77 $ est ajouté à la valeur foncière pour couvrir la valeur de base
                 valeurParLot = 733.77 + montantValeurLot + montantDroitPassage + montantService;
                 valeurFonciereTotale += valeurParLot; 
                 
@@ -73,8 +74,8 @@ public class main {
             }
             
             //calcul de la valeur foncière du terrain tatale et générer les objets dans le fichier sortie
-            Double taxeScolaire = valeurFonciereTotale * 0.012;
-            Double taxeMunicipale = valeurFonciereTotale * 0.025;
+            Double taxeScolaire = valeurFonciereTotale * 0.012; //La taxe scolaire représente 1.2% de la valeur foncière totale
+            Double taxeMunicipale = valeurFonciereTotale * 0.025; //la taxe municipale représente 2.5 % de la valeur foncière totale
             JSONObject terrainSortieJSON = new JSONObject();
             terrainSortieJSON.accumulate("valeur_fonciere_totale", valeurFonciereTotale);
             terrainSortieJSON.accumulate("taxe_scolaire", taxeScolaire);
