@@ -10,6 +10,7 @@
  * @version 1.0
  */
 public class Lot {
+    // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
     private String description;
     private int nbDroitPassage;
     private int nbService;
@@ -32,11 +33,11 @@ public class Lot {
 
     /**
      *
-     * @param description
-     * @param nbDroitPassage
-     * @param nbService
-     * @param superficie
-     * @param dateMesure
+     * @param description       bref description du lot, ex: "lot 1", "lot 2"
+     * @param nbDroitPassage    le nombre de droit de passage
+     * @param nbService         le nombre de services offerts
+     * @param superficie        la superficie en metre carre
+     * @param dateMesure        la date dans laquelle le lot a ete mesure
      *
      * @throws LotException lorsque les donnees n'ont pas le bon format:
      *                      - description et dateMesure sont null

@@ -15,7 +15,7 @@ public class Terrain {
     private int type;
     private int prixMin;
     private int prixMax;
-    private Lot[] lotissement;
+    private Lot[] lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
 
     /**
      * Contructeur par default. Initialise tout les attribut
@@ -26,6 +26,13 @@ public class Terrain {
         prixMin = 0;
         prixMax = 0;
         lotissement = null;
+    }
+
+    public Terrain(int type, int prixMin, int prixMax, Lot[] lotissement){
+        this.type = type;
+        this.prixMin = prixMin;
+        this.prixMax = prixMax;
+        this.lotissement = lotissement;
     }
 
 }
