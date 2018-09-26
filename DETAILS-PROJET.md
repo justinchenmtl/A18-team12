@@ -1,16 +1,16 @@
 # Description du projet
 ## Attributs d'un terrain
 * Type:
-  1. Agricole (0)
-  2. Résidentiel (1)
-  3. Commercial (2)
+  * Agricole (0)
+  * Résidentiel (1)
+  * Commercial (2)
 * Prix minimal/maximal en metre carré
 * Lots: 
-        * Desciption
-        * Nombre de droits de passages
-        * Nombre de service
-        * Superficie
-        * Date de mesure
+  * Desciption
+  * Nombre de droits de passages
+  * Nombre de service
+  * Superficie
+  * Date de mesure
 
 ## Attributs d'un lot
 * Minimum de 2 services (plus de services peuvent être ajoutés)
@@ -38,5 +38,9 @@
 
 ### Valeur des services
 0. 0.00$
-1.  * 0.00$, Superficie &lteq 500 m<sup>2</sup>
-    * 500$/service, 500 m<sup>2</sup> < Superfice <= 10 000 m<sup>2</sup>
+1.  * 0.00$, Superficie <= 500 m<sup>2</sup>
+    * 500$/service, 500 m<sup>2</sup> < Superficie <= 10 000 m<sup>2</sup>
+    * 1 000$/service, Superficie > 10 000 m<sup>2</sup>
+2.  * 500$/service, Superficie <= 500 m<sup>2</sup>
+    * 1 500$/service, Superficie > 500 m<sup>2</sup>
+      * Valeur des services (type 2, i.e. Commercial) **ne peut pas dépasser 5 000$**
