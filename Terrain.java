@@ -32,8 +32,6 @@ public class Terrain {
 
     }
 
-    // Il manque faire la validation des donnees
-
     /**
      *
      * @param type          le type de terrain
@@ -45,7 +43,8 @@ public class Terrain {
      */
     public Terrain(int type, int prixMin, int prixMax, Lot[] lotissement)
     throws TerrainException{
-
+        // Ce n'est pas necessairement la meilleur maniere de valider les donnes.
+        // Possiblement a changer
         if(prixMin > 0 && prixMax > 0) {
             this.type = type;
             this.prixMin = prixMin;
