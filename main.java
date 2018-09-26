@@ -14,7 +14,8 @@ public class main {
     // **********
     // CONSTANTES
     // **********
-    final static String INPUT_FILEPATH = "json/fonciereEntree.json";
+    final static String FILEPATH_INPUT = "json/fonciereEntree.json";
+    final static String FILEPATH_OUTPUT = "json/foncierSortie.json";
     final static String CHARSET_ENCODING = "UTF-8";
     /**
      * @param args the command line arguments
@@ -38,7 +39,7 @@ public class main {
         JSONObject lotSortieObject = new JSONObject();
         
         //lire le fichier d'entrée, en format JSON
-        terrainJSON = FileReader.loadFileIntoString(INPUT_FILEPATH, CHARSET_ENCODING);
+        terrainJSON = FileReader.loadFileIntoString(FILEPATH_INPUT, CHARSET_ENCODING);
         terrain = JSONObject.fromObject(terrainJSON);
         typeTerrain = terrain.getInt("type_terrain");
         prixMin = terrain.getDouble("prix_m2_min");
@@ -90,7 +91,7 @@ public class main {
             terrainSortieJSON.accumulate("lotissements", lotSortieArray);
             
             //créer le fichier sortie, en format JSON
-            FileWriter.saveStringIntoFile("json/foncierSortie.json", terrainSortieJSON.toString());
+            FileWriter.saveStringIntoFile(FILEPATH_OUTPUT, terrainSortieJSON.toString());
             
         }
     }
