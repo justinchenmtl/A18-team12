@@ -7,8 +7,15 @@ import net.sf.json.JSONArray;
  *
  * @author justi
  */
+// On devrait changer le nom de cette classe pour un nom plus significatif
 public class main {
 
+
+    // **********
+    // CONSTANTES
+    // **********
+    final static String INPUT_FILEPATH = "json/fonciereEntree.json";
+    final static String CHARSET_ENCODING = "UTF-8";
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
@@ -31,7 +38,7 @@ public class main {
         JSONObject lotSortieObject = new JSONObject();
         
         //lire le fichier d'entrée, en format JSON
-        terrainJSON = FileReader.loadFileIntoString("json/fonciereEntree.json", "UTF-8");
+        terrainJSON = FileReader.loadFileIntoString(INPUT_FILEPATH, CHARSET_ENCODING);
         terrain = JSONObject.fromObject(terrainJSON);
         typeTerrain = terrain.getInt("type_terrain");
         prixMin = terrain.getDouble("prix_m2_min");
