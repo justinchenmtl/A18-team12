@@ -15,20 +15,26 @@ public class Lot {
     private int nbDroitPassage;
     private int nbService;
     private double superficie;
+    // dateMesure n'est pas valider
     private String dateMesure;
 
     // Un minimum de 2 services (services de base)
-    private final int NOMBRE_SERIVICE_MINIMUM = 2;
+    private final int NOMBRE_SERIVICE_MINIMUM_BASE = 2;
+    private final int NOMBRE_DROIT_PASSAGE_MIN = 0;
+    private final int NOMBRE_SERVICE_MINIMUM = 0;
+    private final double SUPERFICIE_MINIMUM = 0;
 
     /**
      * Initialise les membres avec leur valeur par default
      */
     public Lot(){
+
         description = null;
         nbDroitPassage = 0;
-        nbService = NOMBRE_SERIVICE_MINIMUM;
+        nbService = NOMBRE_SERIVICE_MINIMUM_BASE;
         superficie = 0.0;
         dateMesure = null;
+
     }
 
     /**
@@ -47,15 +53,30 @@ public class Lot {
     public Lot(String description, int nbDroitPassage, int nbService, double superficie, String dateMesure)
         throws LotException{
         // Verifier que les donnees aient le bon format
-        if(null != description || null != dateMesure || nbDroitPassage >= 0 || nbService >= 0 || superficie > 0) {
+        if(null != description && null != dateMesure && nbDroitPassage >= NOMBRE_DROIT_PASSAGE_MIN
+                && nbService >= NOMBRE_SERVICE_MINIMUM && superficie > SUPERFICIE_MINIMUM) {
+
             this.description = description;
             this.nbDroitPassage = nbDroitPassage;
-            this.nbService = NOMBRE_SERIVICE_MINIMUM + nbService;
+            this.nbService = NOMBRE_SERIVICE_MINIMUM_BASE + nbService;
             this.superficie = superficie;
             this.dateMesure = dateMesure;
+
         } else {
+
             // On peut changer le message d'erreure plus tard. Peut-etre le mettre comme FINAL
-            throw new LotException("Il y a une erreure dans le fichier JSON");
+            throw new LotException("Il y a une erreure dans le lot: " +  this.toString());
+
         }
+    }
+
+    /**
+     *
+     * @return la description du lot invalide
+     */
+    @Override
+    public String toString(){
+        // On peut changer cette methde pour la rendre plus precise
+        return "Le lot " + description + " est invalde.";
     }
 }
