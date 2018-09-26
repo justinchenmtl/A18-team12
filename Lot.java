@@ -12,9 +12,12 @@
 public class Lot {
     private String description;
     private int nbDroitPassage;
-    private int nbService;  // un minimum de 2 services (services de base)
+    private int nbService;
     private double superficie;
     private String dateMesure;
+
+    // Un minimum de 2 services (services de base)
+    private final int NOMBRE_SERIVICE_MINIMUM = 2;
 
     /**
      * Initialise les membres avec leur valeur par default
@@ -22,7 +25,7 @@ public class Lot {
     public Lot(){
         description = null;
         nbDroitPassage = 0;
-        nbService = 2;
+        nbService = NOMBRE_SERIVICE_MINIMUM;
         superficie = 0.0;
         dateMesure = null;
     }
@@ -35,15 +38,23 @@ public class Lot {
      * @param superficie
      * @param dateMesure
      *
-     * @throws LotException
+     * @throws LotException lorsque les donnees n'ont pas le bon format:
+     *                      - description et dateMesure sont null
+     *                      - nbDroitPassage et nbService sont negatifs
+     *                      - Superficie est inferieure ou egale a 0
      */
     public Lot(String description, int nbDroitPassage, int nbService, double superficie, String dateMesure)
         throws LotException{
-
-        this.description =  description;
-        this.nbDroitPassage = nbDroitPassage;
-        this.nbService = nbService;
-        this.superficie = superficie;
-        this.dateMesure = dateMesure;
+        // Verifier que les donnees aient le bon format
+        if(null != description || null != dateMesure || nbDroitPassage >= 0 || nbService >= 0 || superficie > 0) {
+            this.description = description;
+            this.nbDroitPassage = nbDroitPassage;
+            this.nbService = NOMBRE_SERIVICE_MINIMUM + nbService;
+            this.superficie = superficie;
+            this.dateMesure = dateMesure;
+        } else {
+            // On peut changer le message d'erreure plus tard. Peut-etre le mettre comme FINAL
+            throw new LotException("Il y a une erreure dans le fichier JSON");
+        }
     }
 }
