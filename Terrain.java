@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * JSON.
  *
  * Un terrain a 4 attributs:
- *  - un type 
+ *  - un type (en general, le type peut etre n'importe quel entier, depend de la situation externe)
  *  - un prix minimum par metre carre
  *  - un prix maximum par metre carre
  *  - un ou des lots
