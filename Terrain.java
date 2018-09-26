@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *  - un type (en general, le type peut etre n'importe quel entier, depend de la situation externe)
  *  - un prix minimum par metre carre
  *  - un prix maximum par metre carre
- *  - un ou des lots
+ *  - un ou plusieurs lots
  *
  * @author josue
  * @version 1.0
