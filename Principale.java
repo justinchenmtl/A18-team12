@@ -24,7 +24,7 @@ public class Principale {
     final static double POURCENTAGE_DROIT_PASSAGE_AGRICOLE = 0.05;
     final static double POURCENTAGE_DROIT_PASSAGE_RESIDENTIEL = 0.1;
     final static double POURCENTAGE_DROIT_PASSAGE_COMMERCIAL = 0.15;
-    final static double PLAFOND_VALEUR_SERVICE = 5000;
+    final static double PLAFOND_VALEUR_SERVICE_COMMERCIAL = 5000;
 
     static double valeurLot(){
         return 0;
@@ -74,7 +74,7 @@ public class Principale {
         return 0;
     }
 
-    static double valeurFonciere(){
+    static double valeurFonciereTotale(){
         return 0;
     }
 
