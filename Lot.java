@@ -1,5 +1,5 @@
 /**
- * Un lot contient 4 attributs:
+ * Un lot contient 5 attributs:
  *  - une description
  *  - un nombre de droits de passage
  *  - un nombre de service (minimum de 2 servicess de base)

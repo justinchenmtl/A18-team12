@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class Terrain {
     // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
     private int type;
-    private int prixMin;
-    private int prixMax;
+    private double prixMin;
+    private double prixMax;
     private Lot[] lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
 
     /**
@@ -41,7 +41,7 @@ public class Terrain {
      *
      * @throws TerrainException si le prix minimum et le prix maximum sont inferieur ou egale a 0
      */
-    public Terrain(int type, int prixMin, int prixMax, Lot[] lotissement)
+    public Terrain(int type, double prixMin, double prixMax, Lot[] lotissement)
     throws TerrainException{
         // Ce n'est pas necessairement la meilleur maniere de valider les donnes.
         // Possiblement a changer
