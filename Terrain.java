@@ -13,11 +13,19 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class Terrain {
+
+    // **********
+    // CONSTANTES
+    // **********
+    public static final int AGRICOLE = 0;
+    public static final int RESIDENTIEL = 1;
+    public static  final int COMMERCIAL = 2;
+
     // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
-    private int type;
-    private double prixMin;
-    private double prixMax;
-    private Lot[] lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
+    public int type;
+    public double prixMin;
+    public double prixMax;
+    public ArrayList<Lot> lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
 
     /**
      * Contructeur par default. Initialise tout les attribut
@@ -41,11 +49,11 @@ public class Terrain {
      *
      * @throws TerrainException si le prix minimum et le prix maximum sont inferieur ou egale a 0
      */
-    public Terrain(int type, double prixMin, double prixMax, Lot[] lotissement)
+    public Terrain(int type, double prixMin, double prixMax, ArrayList<Lot> lotissement)
     throws TerrainException{
         // Ce n'est pas necessairement la meilleur maniere de valider les donnes.
         // Possiblement a changer
-        if(prixMin > 0 && prixMax > 0) {
+        if(prixMin > 0 && prixMax > 0 && null != lotissement) {
             this.type = type;
             this.prixMin = prixMin;
             this.prixMax = prixMax;
@@ -55,6 +63,38 @@ public class Terrain {
             throw new TerrainException("Terrain invalide.");
         }
 
+
     }
 
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setLotissement(ArrayList<Lot> lotissement) {
+        this.lotissement = lotissement;
+    }
+
+    public void setPrixMax(double prixMax) {
+        this.prixMax = prixMax;
+    }
+
+    public void setPrixMin(double prixMin) {
+        this.prixMin = prixMin;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public ArrayList<Lot> getLotissement() {
+        return lotissement;
+    }
+
+    public double getPrixMax() {
+        return prixMax;
+    }
+
+    public double getPrixMin() {
+        return prixMin;
+    }
 }

@@ -8,7 +8,7 @@ import net.sf.json.JSONArray;
  * @author justi
  */
 // On devrait changer le nom de cette classe pour un nom plus significatif
-public class main {
+public class Principale {
 
 
     // **********
@@ -17,6 +17,67 @@ public class main {
     final static String FILEPATH_INPUT = "json/fonciereEntree.json";
     final static String FILEPATH_OUTPUT = "json/foncierSortie.json";
     final static String CHARSET_ENCODING = "UTF-8";
+    final static double VALEUR_FONCIERE_FIXE = 733.77;
+    final static double TAXE_SCOLAIRE = 0.012;
+    final static double TAXE_MUNICIPALE = 0.025;
+    final static double DROIT_PASSAGE_MONTANT_BASE = 500;
+    final static double POURCENTAGE_DROIT_PASSAGE_AGRICOLE = 0.05;
+    final static double POURCENTAGE_DROIT_PASSAGE_RESIDENTIEL = 0.1;
+    final static double POURCENTAGE_DROIT_PASSAGE_COMMERCIAL = 0.15;
+    final static double PLAFOND_VALEUR_SERVICE = 5000;
+
+    static double valeurLot(){
+        return 0;
+    }
+
+    static double valeurLotAgricole(){
+        return 0;
+    }
+
+    static double valeurLotResidentiel(){
+        return 0;
+    }
+
+    static double valeurLotCommercial(){
+        return 0;
+    }
+
+    static double valeurDroitPass(){
+        return 0;
+    }
+
+    static double valeurDroitPassAgricole(){
+        return 0;
+    }
+
+    static double valeurDroitPassResidentiel(){
+        return 0;
+    }
+
+    static double valeurDroitPassCommercial(){
+        return 0;
+    }
+
+    static double valeurService(){
+        return 0;
+    }
+
+    static double valeurServiceAgricole(){
+        return 0;
+    }
+
+    static double valeurServiceResidentiel(){
+        return 0;
+    }
+
+    static double valeurServiceCommercial(){
+        return 0;
+    }
+
+    static double valeurFonciere(){
+        return 0;
+    }
+
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
