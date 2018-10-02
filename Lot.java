@@ -1,3 +1,4 @@
+
 /**
  * Un lot contient 5 attributs:
  *  - une description
@@ -10,12 +11,13 @@
  * @version 1.0
  */
 public class Lot {
+
     // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
     private String description;
     private int nbDroitPassage;
     private int nbService;
     private double superficie;
-    // dateMesure n'est pas valider
+    // dateMesure n'est pas utile
     private String dateMesure;
 
     // Un minimum de 2 services (services de base)
@@ -27,7 +29,7 @@ public class Lot {
     /**
      * Initialise les membres avec leur valeur par default
      */
-    public Lot(){
+    public Lot() {
 
         description = null;
         nbDroitPassage = 0;
@@ -39,21 +41,20 @@ public class Lot {
 
     /**
      *
-     * @param description       bref description du lot, ex: "lot 1", "lot 2"
-     * @param nbDroitPassage    le nombre de droit de passage
-     * @param nbService         le nombre de services offerts
-     * @param superficie        la superficie en metre carre
-     * @param dateMesure        la date dans laquelle le lot a ete mesure
+     * @param description bref description du lot, ex: "lot 1", "lot 2"
+     * @param nbDroitPassage le nombre de droit de passage
+     * @param nbService le nombre de services offerts
+     * @param superficie la superficie en metre carre
+     * @param dateMesure la date dans laquelle le lot a ete mesure
      *
-     * @throws LotException lorsque les donnees n'ont pas le bon format:
-     *                      - description et dateMesure sont null
-     *                      - nbDroitPassage et nbService sont negatifs
-     *                      - Superficie est inferieure ou egale a 0
+     * @throws LotException lorsque les donnees n'ont pas le bon format: -
+     * description et dateMesure sont null - nbDroitPassage et nbService sont
+     * negatifs - Superficie est inferieure ou egale a 0
      */
     public Lot(String description, int nbDroitPassage, int nbService, double superficie, String dateMesure)
-        throws LotException{
+            throws LotException {
         // Verifier que les donnees aient le bon format
-        if(null != description && null != dateMesure && nbDroitPassage >= NOMBRE_DROIT_PASSAGE_MIN
+        if (null != description && null != dateMesure && nbDroitPassage >= NOMBRE_DROIT_PASSAGE_MIN
                 && nbService >= NOMBRE_SERVICE_MINIMUM && superficie > SUPERFICIE_MINIMUM) {
 
             this.description = description;
@@ -65,18 +66,73 @@ public class Lot {
         } else {
 
             // On peut changer le message d'erreure plus tard. Peut-etre le mettre comme FINAL
-            throw new LotException("Il y a une erreure dans le lot: " +  this.toString());
+            throw new LotException("lot non conforme");
 
         }
     }
 
-    /**
-     *
-     * @return la description du lot invalide
-     */
-    @Override
-    public String toString(){
-        // On peut changer cette methde pour la rendre plus precise
-        return "Le lot " + description + " est invalde.";
+    public double ValeurLot(int typeTerrain, int superficie, double prixMin, double prixMax, double prixMoyen) {
+        double valeurLot = 0.0;
+        switch (typeTerrain) {
+            case 0:
+                valeurLot = superficie * prixMin;
+                break;
+            case 1:
+                valeurLot = superficie * prixMoyen;
+                break;
+            default:
+                valeurLot = superficie * prixMax;
+                break;
+        }
+        return valeurLot;
     }
+
+    public double ValeurDroitPassage(int typeTerrain, int nbrDroitPassage, double ValeurLot) {
+        double valeurDroitPassage = 0.0;
+        switch (typeTerrain) {
+            case 0:
+                valeurDroitPassage = 500 - (nbrDroitPassage * (ValeurLot * 0.05));
+                break;
+            case 1:
+                valeurDroitPassage = 500 - (nbrDroitPassage * (ValeurLot * 0.1));
+                break;
+            default:
+                valeurDroitPassage = 500 - (nbrDroitPassage * (ValeurLot * 0.15));
+                break;
+        }
+
+        return valeurDroitPassage;
+    }
+
+    public double ValeurServices(int typeTerrain, int nbService, double superficie) {
+        double valeurServices = 0.0;
+        switch (typeTerrain) {
+            case 0:
+                valeurServices = 0.0;
+                break;
+            case 1:
+                if (superficie <= 500) {
+                    valeurServices = 0.0;
+                } else if (superficie > 500 || superficie <= 10000) {
+                    valeurServices = 500 * (nbService + 2);
+                } else {
+                    valeurServices = 1500 * (nbService + 2);
+                }
+                break;
+            default:
+                if (superficie <= 500) {
+                    valeurServices = 500 * (nbService + 2);
+                } else if (superficie > 500) {
+                    valeurServices = 1500 * (nbService + 2);
+                }
+                break;
+        }
+
+        if (valeurServices > 5000) {
+            valeurServices = 5000;
+        }
+
+        return valeurServices;
+    }
+
 }
