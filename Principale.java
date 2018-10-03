@@ -74,10 +74,13 @@ public class Principale {
         return 0;
     }
 
+    /**
+     * Les taxes vont etre a l'interieur de la methode(dans le calcul du total)
+     */
+
     static double valeurFonciereTotale(){
         return 0;
     }
-
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
