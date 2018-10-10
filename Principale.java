@@ -39,7 +39,9 @@ public class Principale {
     }
 
     static double valeurLotCommercial(){
-        return 0;
+        double valeurLot = 0.0;
+               valeurLot = Lot.superficie * Terrain.prixMax;
+        return valeurLot;
     }
 
     static double valeurDroitPass(){
@@ -55,6 +57,8 @@ public class Principale {
     }
 
     static double valeurDroitPassCommercial(){
+        double valeurDroitPass = 0.0
+               valeurDroitPass = 500 - (Lot.nbDroitPassage*(0.15*valeurLotCommercial()));
         return 0;
     }
 
@@ -71,6 +75,7 @@ public class Principale {
     }
 
     static double valeurServiceCommercial(){
+
         return 0;
     }
 
