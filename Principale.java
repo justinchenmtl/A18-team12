@@ -21,6 +21,7 @@ public class Principale {
     final static double TAXE_SCOLAIRE = 0.012;
     final static double TAXE_MUNICIPALE = 0.025;
     final static double DROIT_PASSAGE_MONTANT_BASE = 500;
+    final static double DROIT_PASSAGE_MONTANT_SUPERIEURE_500_COMMERCIAL = 1500;
     final static double POURCENTAGE_DROIT_PASSAGE_AGRICOLE = 0.05;
     final static double POURCENTAGE_DROIT_PASSAGE_RESIDENTIEL = 0.1;
     final static double POURCENTAGE_DROIT_PASSAGE_COMMERCIAL = 0.15;
@@ -39,9 +40,11 @@ public class Principale {
     }
 
     static double valeurLotCommercial(){
-        double valeurLot = 0.0;
-               valeurLot = Lot.superficie * Terrain.prixMax;
-        return valeurLot;
+        double valeurLotCommercial;
+
+               valeurLotCommercial = Lot.superficie * Terrain.prixMax;
+
+        return valeurLotCommercial ;
     }
 
     static double valeurDroitPass(){
@@ -57,9 +60,12 @@ public class Principale {
     }
 
     static double valeurDroitPassCommercial(){
-        double valeurDroitPass = 0.0
-               valeurDroitPass = 500 - (Lot.nbDroitPassage*(0.15*valeurLotCommercial()));
-        return 0;
+        double valeurDroitPassCommercial;
+
+               valeurDroitPassCommercial = DROIT_PASSAGE_MONTANT_BASE -
+                    (Lot.nbDroitPassage*(POURCENTAGE_DROIT_PASSAGE_COMMERCIAL*valeurLotCommercial()));
+
+        return valeurDroitPassCommercial;
     }
 
     static double valeurService(){
@@ -75,8 +81,18 @@ public class Principale {
     }
 
     static double valeurServiceCommercial(){
+        double valeurServiceCommercial;
 
-        return 0;
+        if(Lot.superficie <= DROIT_PASSAGE_MONTANT_BASE){
+            valeurServiceCommercial = DROIT_PASSAGE_MONTANT_BASE;
+        }else{
+            valeurServiceCommercial = DROIT_PASSAGE_MONTANT_SUPERIEURE_500_COMMERCIAL*(Lot.nbService + 2);
+            if(valeurServiceCommercial > PLAFOND_VALEUR_SERVICE_COMMERCIAL ){
+                valeurServiceCommercial = PLAFOND_VALEUR_SERVICE_COMMERCIAL ;
+            }
+        }
+
+        return valeurServiceCommercial;
     }
 
     /**
@@ -97,13 +113,13 @@ public class Principale {
         JSONArray lotArray;
         JSONObject lotObject;
         int typeTerrain;
-        Double prixMin;
-        Double prixMax;
+        double prixMin;
+        double prixMax;
         String lotDescription;
         int nombreDroit;
         int nombreService;
         int superficie;
-        Double valeurFonciereTotale = 0.0;
+        double valeurFonciereTotale = 0.0;
         JSONArray lotSortieArray = new JSONArray();
         JSONObject lotSortieObject = new JSONObject();
         
@@ -125,22 +141,15 @@ public class Principale {
                 superficie = lotObject.getInt("superficie");
                 
                 //calcul de la valeur foncière du lot
-                Double montantValeurLot = 0.0;
-                Double montantDroitPassage = 0.0;
-                Double montantService = 0.0;
-                Double valeurParLot = 0.0; 
-                montantValeurLot = superficie * prixMax;
-                montantDroitPassage = 500-(nombreDroit*(0.15*montantValeurLot));//500 représent un montant de base                
-                if(superficie <=500){
-                    montantService = 500.00;
-                }else{
-                    montantService = 1500.00*(nombreService + 2);//1500.00 $ du service, si la superficie est supérieure à 500 m2
-                    if(montantService > 5000.00){
-                        montantService = 5000.00;//Le montant pour les services ne peut pas dépasser les 5000.00 $
-                    }
-                }
+                double montantValeurLot = 0.0;
+                double montantDroitPassage = 0.0;
+                double montantService = 0.0;
+                double valeurParLot = 0.0;
+                montantValeurLot = valeurLotCommercial();//ici la fonction est remplacée par la méthode en haut
+                montantDroitPassage = valeurDroitPassCommercial();//ici la fonction est remplacée par la méthode en haut
+                montantService = valeurServiceCommercial();//ici la fonction est remplacée par la méthode en haut
                 //Un montant fixe de 733.77 $ est ajouté à la valeur foncière pour couvrir la valeur de base
-                valeurParLot = 733.77 + montantValeurLot + montantDroitPassage + montantService;
+                valeurParLot = VALEUR_FONCIERE_FIXE + montantValeurLot + montantDroitPassage + montantService;
                 valeurFonciereTotale += valeurParLot; 
                 
                 //générer l'arraylist dans le fichier sortie, en format JSON
@@ -151,8 +160,8 @@ public class Principale {
             }
             
             //calcul de la valeur foncière du terrain tatale et générer les objets dans le fichier sortie
-            Double taxeScolaire = valeurFonciereTotale * 0.012; //La taxe scolaire représente 1.2% de la valeur foncière totale
-            Double taxeMunicipale = valeurFonciereTotale * 0.025; //la taxe municipale représente 2.5 % de la valeur foncière totale
+            double taxeScolaire = valeurFonciereTotale * 0.012; //La taxe scolaire représente 1.2% de la valeur foncière totale
+            double taxeMunicipale = valeurFonciereTotale * 0.025; //la taxe municipale représente 2.5 % de la valeur foncière totale
             JSONObject terrainSortieJSON = new JSONObject();
             terrainSortieJSON.accumulate("valeur_fonciere_totale", valeurFonciereTotale);
             terrainSortieJSON.accumulate("taxe_scolaire", taxeScolaire);

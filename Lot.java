@@ -12,9 +12,15 @@
 public class Lot {
     // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
     private String description;
-    private int nbDroitPassage;
-    private int nbService;
-    private double superficie;
+    /**ici private est remplacé par public, parce que il faut faire reference dans les méthods de la classe Principale.
+       De plus static est ajouté parce que les méthods dans la classe Principale sont utilisés par static.
+     */
+    public static int nbDroitPassage;
+    public static int nbService;
+    /**ici private est remplacé par public, parce que il faut faire reference dans les méthods de la classe Principale.
+       De plus static est ajouté parce que les méthods dans la classe Principale sont utilisés par static.
+     */
+    public static double superficie;
     // dateMesure n'est pas valider
     private String dateMesure;
 

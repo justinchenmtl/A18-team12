@@ -24,7 +24,8 @@ public class Terrain {
     // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
     public int type;
     public double prixMin;
-    public double prixMax;
+    //ici static est ajouté, parce qu'on utilise static méthode dans la classe Principale
+    public static double prixMax;
     public ArrayList<Lot> lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
 
     /**
