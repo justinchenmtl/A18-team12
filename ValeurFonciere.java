@@ -103,9 +103,7 @@ public class ValeurFonciere {
         return 0;
     }
 
-    static void lireFicher(String fichier){
-        
-    }
+
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
