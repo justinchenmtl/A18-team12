@@ -12,15 +12,12 @@
 public class Lot {
     // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
     private String description;
-    /**ici private est remplacé par public, parce que il faut faire reference dans les méthods de la classe Principale.
-       De plus static est ajouté parce que les méthods dans la classe Principale sont utilisés par static.
-     */
-    public static int nbDroitPassage;
-    public static int nbService;
-    /**ici private est remplacé par public, parce que il faut faire reference dans les méthods de la classe Principale.
-       De plus static est ajouté parce que les méthods dans la classe Principale sont utilisés par static.
-     */
-    public static double superficie;
+
+    private int nbDroitPassage;
+    private int nbService;
+
+    private double superficie;
+
     // dateMesure n'est pas valider
     private String dateMesure;
 
@@ -74,6 +71,38 @@ public class Lot {
             throw new LotException("Il y a une erreure dans le lot: " +  this.toString());
 
         }
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getSuperficie() {
+        return superficie;
+    }
+
+    public int getNbDroitPassage() {
+        return nbDroitPassage;
+    }
+
+    public int getNbService() {
+        return nbService;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSuperficie(double superficie) {
+        superficie = superficie;
+    }
+
+    public void setNbDroitPassage(int nbDroitPassage) {
+        nbDroitPassage = nbDroitPassage;
+    }
+
+    public void setNbService(int nbService) {
+        nbService = nbService;
     }
 
     /**
