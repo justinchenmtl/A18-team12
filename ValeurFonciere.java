@@ -110,7 +110,6 @@ public class ValeurFonciere {
      */
     public static void main(String[] args) throws IOException {
         //Déclaration des variables et objets
-        String terrainJSON;
         JSONObject terrain;
         JSONArray lotArray;
         JSONObject lotObject;
@@ -126,8 +125,7 @@ public class ValeurFonciere {
         JSONObject lotSortieObject = new JSONObject();
         
         //lire le fichier d'entrée, en format JSON
-        terrainJSON = FileReader.loadFileIntoString(FILEPATH_INPUT, CHARSET_ENCODING);
-        terrain = JSONObject.fromObject(terrainJSON);
+        terrain = JSONObject.fromObject(FileReader.loadFileIntoString(FILEPATH_INPUT, CHARSET_ENCODING));
         typeTerrain = terrain.getInt("type_terrain");
         prixMin = terrain.getDouble("prix_m2_min");
         prixMax = terrain.getDouble("prix_m2_max");
