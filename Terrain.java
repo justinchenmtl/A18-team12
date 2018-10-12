@@ -22,11 +22,10 @@ public class Terrain {
     public static  final int COMMERCIAL = 2;
 
     // On peut peut-etre les rendre public pour ne pas ecrire les setter et getter
-    public int type;
-    public double prixMin;
-    //ici static est ajouté, parce qu'on utilise static méthode dans la classe Principale
-    public static double prixMax;
-    public ArrayList<Lot> lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
+    private int type;
+    private double prixMin;
+    private double prixMax;
+    private ArrayList<Lot> lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
 
     /**
      * Contructeur par default. Initialise tout les attribut
