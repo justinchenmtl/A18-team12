@@ -8,7 +8,7 @@ import net.sf.json.JSONArray;
  * @author justi
  */
 // On devrait changer le nom de cette classe pour un nom plus significatif
-public class ValeurLot {
+public class ValeurFonciere {
 
 
     // **********
