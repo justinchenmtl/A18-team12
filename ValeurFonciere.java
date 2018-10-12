@@ -39,10 +39,10 @@ public class ValeurFonciere {
         return 0;
     }
 
-    static double valeurLotCommercial(){
+    static double valeurLotCommercial(int superficie, double prixMax){
         double valeurLotCommercial;
 
-        valeurLotCommercial = Lot.superficie * Terrain.prixMax;
+        valeurLotCommercial = superficie * prixMax;
 
         return valeurLotCommercial ;
     }
@@ -59,11 +59,11 @@ public class ValeurFonciere {
         return 0;
     }
 
-    static double valeurDroitPassCommercial(){
+    static double valeurDroitPassCommercial(int nbDroitPassage, int superficie, double prixMax){
         double valeurDroitPassCommercial;
 
         valeurDroitPassCommercial = DROIT_PASSAGE_MONTANT_BASE -
-                (Lot.nbDroitPassage*(POURCENTAGE_DROIT_PASSAGE_COMMERCIAL*valeurLotCommercial()));
+                (nbDroitPassage*(POURCENTAGE_DROIT_PASSAGE_COMMERCIAL*valeurLotCommercial(superficie, prixMax)));
 
         return valeurDroitPassCommercial;
     }
@@ -80,13 +80,13 @@ public class ValeurFonciere {
         return 0;
     }
 
-    static double valeurServiceCommercial(){
+    static double valeurServiceCommercial(int superficie, int nbService){
         double valeurServiceCommercial;
 
-        if(Lot.superficie <= DROIT_PASSAGE_MONTANT_BASE){
+        if(superficie <= DROIT_PASSAGE_MONTANT_BASE){
             valeurServiceCommercial = DROIT_PASSAGE_MONTANT_BASE;
         }else{
-            valeurServiceCommercial = DROIT_PASSAGE_MONTANT_SUPERIEURE_500_COMMERCIAL*(Lot.nbService + 2);
+            valeurServiceCommercial = DROIT_PASSAGE_MONTANT_SUPERIEURE_500_COMMERCIAL*(nbService + 2);
             if(valeurServiceCommercial > PLAFOND_VALEUR_SERVICE_COMMERCIAL ){
                 valeurServiceCommercial = PLAFOND_VALEUR_SERVICE_COMMERCIAL ;
             }
@@ -103,13 +103,16 @@ public class ValeurFonciere {
         return 0;
     }
 
-
+    static void lireFicher(String fichier){
+        
+    }
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
         //Déclaration des variables et objets
+        String terrainJSON;
         JSONObject terrain;
         JSONArray lotArray;
         JSONObject lotObject;
@@ -117,15 +120,16 @@ public class ValeurFonciere {
         double prixMin;
         double prixMax;
         String lotDescription;
-        int nombreDroit;
-        int nombreService;
+        int nbDroitPassage;
+        int nbService;
         int superficie;
         double valeurFonciereTotale = 0.0;
         JSONArray lotSortieArray = new JSONArray();
         JSONObject lotSortieObject = new JSONObject();
         
         //lire le fichier d'entrée, en format JSON
-        terrain = JSONObject.fromObject(FileReader.loadFileIntoString(FILEPATH_INPUT, CHARSET_ENCODING));
+        terrainJSON = FileReader.loadFileIntoString(FILEPATH_INPUT, CHARSET_ENCODING);
+        terrain = JSONObject.fromObject(terrainJSON);
         typeTerrain = terrain.getInt("type_terrain");
         prixMin = terrain.getDouble("prix_m2_min");
         prixMax = terrain.getDouble("prix_m2_max");
@@ -136,8 +140,8 @@ public class ValeurFonciere {
             for(int i = 0; i < lotArray.size(); ++i){
                 lotObject = lotArray.getJSONObject(i);
                 lotDescription = lotObject.getString("description");
-                nombreDroit = lotObject.getInt("nombre_droits_passage");
-                nombreService = lotObject.getInt("nombre_services");
+                nbDroitPassage = lotObject.getInt("nombre_droits_passage");
+                nbService = lotObject.getInt("nombre_services");
                 superficie = lotObject.getInt("superficie");
                 
                 //calcul de la valeur foncière du lot
@@ -145,9 +149,9 @@ public class ValeurFonciere {
                 double montantDroitPassage = 0.0;
                 double montantService = 0.0;
                 double valeurParLot = 0.0;
-                montantValeurLot = valeurLotCommercial();//ici la fonction est remplacée par la méthode en haut
-                montantDroitPassage = valeurDroitPassCommercial();//ici la fonction est remplacée par la méthode en haut
-                montantService = valeurServiceCommercial();//ici la fonction est remplacée par la méthode en haut
+                montantValeurLot = valeurLotCommercial(superficie, prixMax);
+                montantDroitPassage = valeurDroitPassCommercial(nbDroitPassage, superficie, prixMax);
+                montantService = valeurServiceCommercial(superficie, nbService);
                 //Un montant fixe de 733.77 $ est ajouté à la valeur foncière pour couvrir la valeur de base
                 valeurParLot = VALEUR_FONCIERE_FIXE + montantValeurLot + montantDroitPassage + montantService;
                 valeurFonciereTotale += valeurParLot; 

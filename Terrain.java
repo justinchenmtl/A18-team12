@@ -1,5 +1,3 @@
-import net.sf.json.JSONArray;
-
 import java.util.ArrayList;
 /**
  * Utiliser pour decrire un terrain qui sera lu a partir d'un fichier
@@ -27,7 +25,7 @@ public class Terrain {
     private int type;
     private double prixMin;
     private double prixMax;
-    private JSONArray lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
+    private ArrayList<Lot> lotissement; // Peut etre changer a ArrayList pour faciler l'ajout de lots
 
     /**
      * Contructeur par default. Initialise tout les attribut
@@ -51,7 +49,7 @@ public class Terrain {
      *
      * @throws TerrainException si le prix minimum et le prix maximum sont inferieur ou egale a 0
      */
-    public Terrain(int type, double prixMin, double prixMax, JSONArray lotissement)
+    public Terrain(int type, double prixMin, double prixMax, ArrayList<Lot> lotissement)
     throws TerrainException{
         // Ce n'est pas necessairement la meilleur maniere de valider les donnes.
         // Possiblement a changer
@@ -72,7 +70,7 @@ public class Terrain {
         this.type = type;
     }
 
-    public void setLotissement(JSONArray lotissement) {
+    public void setLotissement(ArrayList<Lot> lotissement) {
         this.lotissement = lotissement;
     }
 
@@ -88,7 +86,7 @@ public class Terrain {
         return type;
     }
 
-    public JSONArray getLotissement() {
+    public ArrayList<Lot> getLotissement() {
         return lotissement;
     }
 
