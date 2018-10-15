@@ -5,6 +5,10 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
+/**
+ *
+ * @author justin
+ */
 public class FileWriter {
     public static void saveStringIntoFile(String filePath, String contentToSave)
     throws FileNotFoundException, IOException {

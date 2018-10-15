@@ -5,7 +5,7 @@ import net.sf.json.JSONArray;
 
 /**
  *
- * @author justi
+ * @author justin
  */
 // On devrait changer le nom de cette classe pour un nom plus significatif
 public class ValeurFonciere {

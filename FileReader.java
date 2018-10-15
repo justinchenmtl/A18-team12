@@ -12,7 +12,7 @@ import org.apache.commons.io.IOUtils;
 
 /**
  *
- * @author justi
+ * @author justin
  */
 public class FileReader {
     public static String loadFileIntoString(String filePath, String fileEncoding) throws
